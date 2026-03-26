@@ -23,6 +23,7 @@ async function getSingleMusicApi(event, req, res) {
   return {
     name: song.name,
     id: song.id,
+    url: song.url,
   };
 }
 

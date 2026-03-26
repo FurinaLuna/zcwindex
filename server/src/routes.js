@@ -1,5 +1,5 @@
 /**
- * 鎺ュ彛璺敱
+ * 路由配置
  * @author FurinaLuna
  */
 const routes = [

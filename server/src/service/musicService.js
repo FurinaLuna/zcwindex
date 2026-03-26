@@ -1,6 +1,7 @@
 const {
   searchMusics,
   playlistDetail,
+  getSongUrl,
 } = require("../thirdpart/neteaseMusicApi");
 
 /**
@@ -12,7 +13,12 @@ async function getSingleMusic(keywords) {
   if (songs.length < 1) {
     return null;
   }
-  return songs[0];
+  const song = songs[0];
+  const url = await getSongUrl(song.id);
+  return {
+    ...song,
+    url,
+  };
 }
 
 /**

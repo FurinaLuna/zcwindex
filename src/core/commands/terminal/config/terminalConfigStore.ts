@@ -1,21 +1,21 @@
 import { defineStore } from "pinia";
 
 /**
- * 缁堢閰嶇疆鐘舵€佸瓨鍌?
+ * 终端配置存储
  *
  * @author FurinaLuna
  */
 export const useTerminalConfigStore = defineStore("terminalConfig", {
   state: () => ({
-    // 鑳屾櫙
+    // 背景
     background: "black",
-    // 杈撳叆鎻愮ず
+    // 输入提示
     showHint: true,
-    // 缁堢娆㈣繋璇?
+    // 欢迎文本
     welcomeTexts: [] as string[],
   }),
   getters: {},
-  // 鎸佷箙鍖?
+  // 持久化配置
   persist: {
     key: "terminal-config-store",
     storage: window.localStorage,
@@ -34,7 +34,7 @@ export const useTerminalConfigStore = defineStore("terminalConfig", {
       this.background = url;
     },
     /**
-     * 璁剧疆鎴栧弽杞彁绀?
+     *  璁剧疆鎴栧弽杞彁绀?
      * @param hint
      * @return 淇敼鍚庣殑鎻愮ず寮€鍚?/ 鍏抽棴鐘舵€?
      */

@@ -1,4 +1,4 @@
-const { cloudsearch, playlist_detail } = require("NeteaseCloudMusicApi");
+const { cloudsearch, playlist_detail, song_url } = require("NeteaseCloudMusicApi");
 
 /**
  * 搜索音乐
@@ -40,7 +40,33 @@ async function playlistDetail() {
   return result.body.playlist.tracks;
 }
 
+/**
+ * 获取歌曲可播放地址
+ * @param id
+ * @return {Promise<string>}
+ */
+async function getSongUrl(id) {
+  if (!id) {
+    return "";
+  }
+  try {
+    const result = await song_url({
+      id,
+      level: "standard",
+    });
+    if (result.status !== 200) {
+      return "";
+    }
+    const url = result?.body?.data?.[0]?.url;
+    return url || "";
+  } catch (e) {
+    console.log(e);
+    return "";
+  }
+}
+
 module.exports = {
   searchMusics,
   playlistDetail,
+  getSongUrl,
 };
