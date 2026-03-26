@@ -27,13 +27,16 @@ const musicPath = ref("");
 const errorHint = ref("");
 
 onMounted(async () => {
-  // 搜索音乐，返回 id
-  const res: any = await getSingleMusic(name.value);
-  if (res?.code === 0) {
-    const music = res.data;
-    musicPath.value = `//music.163.com/outchain/player?type=2&id=${music.id}&auto=1&height=66`;
-  } else {
-    errorHint.value = "未找到音乐";
+  try {
+    const res: any = await getSingleMusic(name.value);
+    if (res?.code === 0) {
+      const music = res.data;
+      musicPath.value = `//music.163.com/outchain/player?type=2&id=${music.id}&auto=1&height=66`;
+      return;
+    }
+    errorHint.value = res?.message ?? "未找到音乐";
+  } catch (e) {
+    errorHint.value = "音乐服务请求失败";
   }
 });
 </script>
