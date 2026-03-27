@@ -88,30 +88,6 @@ npm run dev
 └── .env                # 环境变量 (不进入 Git)
 ```
 
----
-
-## 🛡️ 关键代码：命令解析引擎
-
-本项目核心在于将用户输入的字符串精准解析为可执行的命令及其参数。
-
-```typescript
-// src/core/commandExecutor.ts
-export const doCommandExecute = async (text: string, terminal: TerminalType) => {
-  text = text.trim();
-  const command = getCommand(text); // 匹配已注册的命令
-  const parsedOptions = doParse(text, command.options); // 利用 getopts 解析参数
-  
-  // 支持无限层级的子命令嵌套执行
-  if (command.subCommands) {
-    await doSubCommandExecute(text, terminal, command);
-    return;
-  }
-  
-  await doAction(command, parsedOptions, terminal); // 执行业务逻辑
-};
-```
-
----
 
 ## ☁️ 部署说明 (Vercel)
 
